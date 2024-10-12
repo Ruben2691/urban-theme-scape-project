@@ -28,23 +28,25 @@ router.post(
     '/',
     validateLogin,
     async (req, res, next) => {
-        const { credential, password } = req.body;
 
-        const user = await User.unscoped().findOne({
+      try {
+        const { credential, password } = req.body;
+ const user = await User.unscoped().findOne({
             where: {
                 [Op.or]: {
                 username: credential,
                 email: credential
                 }
             }
-        });
+ });
+         console.log("User found:", user);
 
         if (!user || !bcrypt.compareSync(password, user.hashedPassword.toString())) {
             const err = new Error('Login failed');
             err.status = 401;
             err.title = 'Login failed';
             err.errors = { credential: 'The provided credentials were invalid.' };
-            err.message = 'Invalid credentials'
+            // err.message = 'Invalid credentials'
             // return next(err);
             return res.status(401).json({
               'message': err.message
@@ -61,10 +63,13 @@ router.post(
 
         await setTokenCookie(res, safeUser);
 
-        return res.status(200).json({
-            user: safeUser
-        });
-       
+        return res.status(200).json(safeUser);
+      } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Internal Server Error" });
+      }
+
+
     }
 );
 
@@ -100,5 +105,3 @@ router.get(
 
 
 module.exports = router;
-
-
