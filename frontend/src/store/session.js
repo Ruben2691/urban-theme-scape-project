@@ -22,9 +22,9 @@ export const login = ({ credential, password }) => async (dispatch) => {
 
 
   if (res.ok) {
-    let res = await res.json();
-    dispatch(addUser(res));
-    return res;
+    let resTwo = await res.json();
+    dispatch(addUser(resTwo));
+    return resTwo;
   }
 }
 
