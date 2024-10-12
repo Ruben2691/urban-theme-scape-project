@@ -1,3 +1,3 @@
-import LonginFormPage from "./LonginFormPage";
+import LonginFormPage from "./LoginFormPage";
 
 export default LonginFormPage;
