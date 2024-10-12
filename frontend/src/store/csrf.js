@@ -9,7 +9,7 @@ export const csrfFetch = async (url, options = {}) => {
   options.headers = options.headers || {};
 
   // ...
-  console.log('Request headers:', options.headers);
+  // console.log('Request headers:', options.headers);
 
   // ...
 

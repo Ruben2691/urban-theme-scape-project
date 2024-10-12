@@ -39,7 +39,7 @@ const session = (state = initialState, action) => {
       return newState;
     }
     case REMOVE_USER: {
-      return initialState
+      return {...state, ...initialState}
     }
     default:
       return state;
