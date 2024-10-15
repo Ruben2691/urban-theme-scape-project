@@ -6,6 +6,7 @@ export default function NavigationBar() {
       <ul>
         <NavLink to="/">Home</NavLink>
         <NavLink to="/login">Log In</NavLink>
+        <NavLink to="/signup">Sign Up</NavLink>
       </ul>
     </>
   );
