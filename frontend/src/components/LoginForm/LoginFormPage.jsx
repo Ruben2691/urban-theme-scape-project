@@ -4,7 +4,9 @@ import { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import "./LoginFormPage.css";
+// import "./LoginFormPage.css";
+import { login } from "../../store/session";
+
 
 function LoginFormPage() {
   const dispatch = useDispatch();
@@ -25,7 +27,6 @@ function LoginFormPage() {
       }
     );
   };
-
   return (
     <>
       <h1>Log In</h1>
