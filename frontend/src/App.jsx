@@ -5,21 +5,30 @@ import { useDispatch } from "react-redux";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import LoginFormPage from "./components/LoginForm";
 import * as sessionActions from "./store/session";
-import Navigation from "./components/NavigationBar";
+import Navigation from "./components/Navigation";
 import SignupFormPage from "./components/SignupFormPage";
 
 function Layout() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
 
-  useEffect(() => {
-    dispatch(sessionActions.restoreUser()).then(() => {
-      setIsLoaded(true);
-    });
-  }, [dispatch]);
+ useEffect(() => {
+   let isMounted = true;
+
+   dispatch(sessionActions.restoreUser()).then(() => {
+     if (isMounted) {
+       setIsLoaded(true); // Only set state if the component is still mounted
+     }
+   });
+
+   return () => {
+     isMounted = false; // Cleanup function
+   };
+ }, [dispatch]);
+
 
   return <>
-    <Navigation  />
+    <Navigation  isLoaded={isLoaded}/>
     {isLoaded && <Outlet />}
   </>;
 }
