@@ -1,1 +1,37 @@
+#login-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  height: 250px;
+  width: 250px;
+}
 
+#login-header {
+  text-align: center;
+}
+
+.login-credentials {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bold;
+}
+
+.login-inputs {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  width: 200px;
+}
+
+#login-button {
+  margin-left: 75px;
+  margin-top: 7px;
+  margin-bottom: 10px;
+  width: 100px;
+  height: 30px;
+  border-radius: 5px;
+  border: 0px;
+  align-items: center;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+}
