@@ -10,30 +10,30 @@ import LoginFormModal from "../LoginFormModal";
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
 
-  const sessionLinks = sessionUser ? (
-    <li>
-      <ProfileButton user={sessionUser} />
-    </li>
-  ) : (
-    <>
-      <li>
-        <OpenModalButton
-          buttonText="Log In"
-          modalComponent={<LoginFormModal />} // Modal content for login
-        />
-      </li>
-      <li>
-        <NavLink to="/signup">Sign Up</NavLink>
-      </li>
-    </>
-  );
+  // const sessionLinks = sessionUser ? (
+  //   <li>
+  //     <ProfileButton user={sessionUser} />
+  //   </li>
+  // ) : (
+  //   <>
+  //     <li>
+  //       <OpenModalButton
+  //         buttonText="Log In"
+  //         modalComponent={<LoginFormModal />} // Modal content for login
+  //       />
+  //     </li>
+  //     <li>
+  //       <NavLink to="/signup">Sign Up</NavLink>
+  //     </li>
+  //   </>
+  // );
 
   return (
     <ul>
       <li>
         <NavLink to="/">Home</NavLink>
       </li>
-      {isLoaded && sessionLinks}
+      {isLoaded && (<li><ProfileButton user={sessionUser} /></li>)}
     </ul>
   );
 }

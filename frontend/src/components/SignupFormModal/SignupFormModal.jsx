@@ -4,8 +4,9 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import * as sessionActions from "../../store/session";
+import "./SignupFormModal.css";
 
-function SignupFormPage() {
+function SignupFormModal() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
@@ -45,11 +46,12 @@ function SignupFormPage() {
 
   return (
     <>
-      <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
+      <h1 id="signup-header">Sign Up</h1>
+      <form onSubmit={handleSubmit} id="signup-form">
+        <label className="signup-credentials">
           Email
           <input
+            className="signup-inputs"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -57,9 +59,10 @@ function SignupFormPage() {
           />
         </label>
         {errors.email && <p>{errors.email}</p>}
-        <label>
+        <label className="signup-credentials" >
           Username
           <input
+            className="signup-inputs"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -67,9 +70,10 @@ function SignupFormPage() {
           />
         </label>
         {errors.username && <p>{errors.username}</p>}
-        <label>
+        <label className="signup-credentials">
           First Name
           <input
+            className="signup-inputs"
             type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
@@ -77,9 +81,10 @@ function SignupFormPage() {
           />
         </label>
         {errors.firstName && <p>{errors.firstName}</p>}
-        <label>
+        <label className="signup-credentials">
           Last Name
           <input
+            className="signup-inputs"
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
@@ -87,9 +92,10 @@ function SignupFormPage() {
           />
         </label>
         {errors.lastName && <p>{errors.lastName}</p>}
-        <label>
+        <label className="signup-credentials">
           Password
           <input
+            className="signup-inputs"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -97,9 +103,10 @@ function SignupFormPage() {
           />
         </label>
         {errors.password && <p>{errors.password}</p>}
-        <label>
+        <label className="signup-credentials">
           Confirm Password
           <input
+            className="signup-inputs"
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -107,10 +114,10 @@ function SignupFormPage() {
           />
         </label>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit">Sign Up</button>
+        <button type="submit" id="signup-button">Sign Up</button>
       </form>
     </>
   );
 }
 
-export default SignupFormPage;
+export default SignupFormModal;

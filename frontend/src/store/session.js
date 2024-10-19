@@ -87,6 +87,8 @@ const session = (state = initialState, action) => {
     case ADD_USER: {
       const newState = { ...state };
       newState.user = action.payload;
+      console.log(newState);
+
       return newState;
     }
     case REMOVE_USER: {
