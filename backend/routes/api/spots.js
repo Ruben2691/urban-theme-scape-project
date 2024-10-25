@@ -119,7 +119,7 @@ const validateDates = [
         }
         return true
       }),
-  
+
     // Check if endDate exists and is not before or on the same day as startDate
     check('endDate')
       .exists({ checkFalsy: true })
@@ -183,7 +183,7 @@ router.get(
       const spots = await Spot.findAll({
         where,
         include: [
-          { 
+          {
             model: Review,
             attributes: [], // We don't need the full review data, just the average
             // subQuery: false,
@@ -277,8 +277,8 @@ router.get(
     async(req, res) => {
         const spotId = req.params.spotId;
 
-        const spots = await Spot.findAll({
-          where: {id:spotId},
+        const spot = await Spot.findByPk(spotId, {
+
           include: [
            {
              model: Review,
@@ -298,7 +298,7 @@ router.get(
            attributes: {
              include: [
                 [
-                    fn('COUNT', col('Reviews.id')), // Counting the # of Reviews 
+                    fn('COUNT', col('Reviews.id')), // Counting the # of Reviews
                     'numReviews'  // Alias for the result
                 ],
                 [
@@ -307,12 +307,12 @@ router.get(
                 ],
              ]
            },
-           group: ['Spot.id', 'SpotImages.id', 'Owner.id'] 
+           group: ['Spot.id', 'SpotImages.id', 'Owner.id']
        });
 
         // spot Id found
-        
-        return res.status(200).json(spots);
+
+        return res.status(200).json(spot);
     }
 );
 
@@ -329,7 +329,7 @@ router.post(
         const newSpot = await Spot.create({
             ownerId,
             address,
-            city, 
+            city,
             state,
             country,
             lat,
@@ -352,7 +352,7 @@ router.post(
     validateAuthSpot,
     async(req, res) => {
         const spotId = req.params.spotId;
-        
+
         // spotId found & matching
         const {url, preview} = req.body;
         const newImage = await SpotImage.create({
@@ -451,7 +451,7 @@ router.get(
             attributes: ['id', 'url']
           },
         ],
-          group: ['Review.id', 'User.id', 'ReviewImages.id'] 
+          group: ['Review.id', 'User.id', 'ReviewImages.id']
       });
       return res.status(200).json({
         Reviews: reviews
@@ -517,16 +517,16 @@ router.get(
           attributes: ['id', 'firstName', 'lastName']
         },
         ],
-        group: ['Booking.id', 'User.id'] 
+        group: ['Booking.id', 'User.id']
       });
-      
+
       // spot Id found & current user is not the owner
       if (ownerId !== Number(current)) {
         return res.status(200).json({
           Bookings: bookingsUser
         });
       } else {
-        
+
         // spot Id found & current user is the owner
 
         // reordering the output
@@ -537,7 +537,7 @@ router.get(
             ...bookingData    // Spread the rest of the booking details afterward
           };
         });
-        
+
         return res.status(200).json({
           bookings: formattedBookings
         });
@@ -558,7 +558,7 @@ router.post(
       const spotId = req.params.spotId;
       const current = req.user.id;
       const {startDate, endDate} = req.body;
-     
+
       // all requirements passed
       const newBooking = await Booking.create({
           spotId: spotId,
@@ -572,4 +572,3 @@ router.post(
 );
 
 module.exports = router;
-

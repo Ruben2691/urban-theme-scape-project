@@ -20,9 +20,7 @@ const setUser = (user) => {
   };
 };
 
-// frontend/src/store/session.js
 
-// ...
 
 export const login = ({ credential, password }) => async (dispatch) => {
   let res = await csrfFetch("/api/session", {

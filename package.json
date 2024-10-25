@@ -1,5 +1,5 @@
 {
-  "name": "assessment-for-sprint-13-api-documentation-airbnb-main",
+  "name": "authenticate-me",
   "version": "1.0.0",
   "description": "The project breaks down into 2 parts, using AirBnB information * Backend (Mod4) * Frontend (Mod5)",
   "main": "index.js",
