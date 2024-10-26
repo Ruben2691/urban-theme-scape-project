@@ -412,7 +412,7 @@ router.put(
         message: "Spot couldn't be found",
       });
     }
-      
+
 
     await existingSpot.update({
       address: address ? address : existingSpot.address,
@@ -457,14 +457,14 @@ router.delete(
 // Get all Reviews by a Spot's id
 router.get(
   "/:spotId/reviews",
-  validateIdNaN,
-  validateSpotId,
+  // validateIdNaN,
+  // validateSpotId,
   async (req, res) => {
     const spotId = req.params.spotId;
 
     // spot Id found
     const reviews = await Review.findAll({
-      where: { spotId: spotId },
+      where: { spotId },
       include: [
         {
           model: User,
@@ -476,7 +476,7 @@ router.get(
           attributes: ["id", "url"],
         },
       ],
-      group: ["Review.id", "User.id", "ReviewImages.id"],
+      // group: ["Review.id", "User.id", "ReviewImages.id"],
     });
     return res.status(200).json({
       Reviews: reviews,
@@ -488,9 +488,9 @@ router.get(
 router.post(
   "/:spotId/reviews",
   requireAuth,
-  validateIdNaN,
-  validateSpotId,
-  validateReviewExists,
+  // validateIdNaN,
+  // validateSpotId,
+  // validateReviewExists,
   validateReview,
   async (req, res) => {
     const spotId = Number(req.params.spotId);
