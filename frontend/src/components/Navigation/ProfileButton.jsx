@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import * as sessionActions from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
@@ -12,6 +13,7 @@ function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
+  const navigate = useNavigate();
 
   const toggleMenu = (e) => {
     e.stopPropagation(); // Keep click from bubbling up to document and triggering closeMenu
@@ -36,6 +38,10 @@ function ProfileButton({ user }) {
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
+  };
+
+  const goToCreateSpot = () => {
+    navigate("/create-spot"); // Redirect to "Create Spot" page
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
@@ -69,7 +75,12 @@ function ProfileButton({ user }) {
             <li>
               {user.firstName} {user.lastName}
             </li>
-            <li>{user.email}</li>
+              <li>
+                {user.email}
+              </li>
+              <li>
+                <button onClick={goToCreateSpot}>Create Spot</button>
+              </li>
             <li>
               <button onClick={logout}>Log Out</button>
             </li>
